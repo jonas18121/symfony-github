@@ -1,0 +1,21 @@
+name: Pipeline-CD
+on:
+  workflow_dispatch:
+    pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
+      branches: 
+        - main
+jobs:
+  cd:
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Deploy Over SSH
+        uses: appleboy/ssh-action@master # action qui est dans la marquette place comme actions/checkout@v2
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: ls
