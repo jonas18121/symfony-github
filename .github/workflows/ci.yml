@@ -19,7 +19,7 @@ jobs:
     # false : Arrêter la pipeline s'il y a une erreur
     continue-on-error: false # or true 
 
-    # if: github.ref != 'refs/heads/main' # ne pas jouer ce job lors d'un push ou d'un pull request sur la branche main
+    if: github.ref != 'refs/heads/main' # ne pas jouer ce job lors d'un push ou d'un pull request sur la branche main
 
     strategy:
       matrix:
