@@ -3,6 +3,9 @@ on:
   pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
     branches: 
       - main
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
