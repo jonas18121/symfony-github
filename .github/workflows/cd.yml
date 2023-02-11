@@ -1,15 +1,28 @@
 name: Pipeline-CD
 on:
   workflow_dispatch:
-  pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
-    branches: 
-      - main
+    pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
+      branches: 
+        - main
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
       - uses: actions/checkout@v2
+
+      #  Action 2 : Install composer
+      - name: "Composer install"
+        run: |
+          curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
+          composer install --no-interaction --no-progress
+
+      #  Action 3 : Install Symfony CLI
+      - name: Symfony CLI
+        run: |
+          curl -sS https://get.symfony.com/cli/installer | bash
+          mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
 
       - name: Deploy Over SSH
         uses: appleboy/ssh-action@master # action qui est dans la marquette place comme actions/checkout@v2
@@ -19,8 +32,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /var/www/symfony-github
+            cd var/www/symfony-github
+            git config pull.rebase false
             git pull 
-            composer install
+            curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
+            composer install --no-interaction --no-progress
+            curl -sS https://get.symfony.com/cli/installer | bash
+            mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
             symfony console d:m:m -n
             APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
