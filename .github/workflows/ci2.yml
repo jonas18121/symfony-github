@@ -1,17 +1,17 @@
 name: Pipeline-CI-2
 on:
   workflow_dispatch:
-    pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
-      branches:
-        # - production
-        # - main
-        - develop
-      paths-ignore:
-        - '**.md'
-        - 'examples/**'
-    push:
-      branches:
-        - '*' # permet d'executer les jobs avec les push de n'importe quel branches
+  pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
+    branches:
+      # - production
+      # - main
+      - develop
+    paths-ignore:
+      - '**.md'
+      - 'examples/**'
+  push:
+    branches:
+      - '*' # permet d'executer les jobs avec les push de n'importe quel branches
 jobs:
   ci2:
     runs-on: self-hosted
@@ -19,7 +19,7 @@ jobs:
     # false : Arrêter la pipeline s'il y a une erreur
     continue-on-error: false # or true
 
-    # if: github.ref != 'refs/heads/main' # ne pas jouer ce job lors d'un push ou d'un pull request sur la branche main
+    if: github.ref != 'refs/heads/main' # ne pas jouer ce job lors d'un push ou d'un pull request sur la branche main
 
     strategy:
       matrix:
