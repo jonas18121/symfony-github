@@ -21,7 +21,7 @@ jobs:
       #  Action 2 : Install composer
       - name: "Composer install"
         run: |
-          curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
+          curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar --no-plugins --no-scripts /usr/local/bin/composer 
           composer install --no-interaction --no-progress
 
       #  Action 3 : Install Symfony CLI
@@ -42,7 +42,7 @@ jobs:
             git config pull.rebase false
             git pull 
             sudo apt-get install php-sqlite3 -y
-            curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
+            curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar --no-plugins --no-scripts /usr/local/bin/composer 
             composer install --no-interaction --no-progress
             curl -sS https://get.symfony.com/cli/installer | bash mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
             symfony console d:m:m -n
