@@ -11,6 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # pdo_sqlite
+      - name: pdo_sqlite
+        run: sudo apt-get install php-sqlite3 -y
+
       #  Action 2 : Install composer
       - name: "Composer install"
         run: |
@@ -34,8 +38,11 @@ jobs:
             cd var/www/symfony-github
             git config pull.rebase false
             git pull 
-            curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
             composer install --no-interaction --no-progress
-            curl -sS https://get.symfony.com/cli/installer | bash mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
             symfony console d:m:m -n
             APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear 
+
+
+
+# curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
+# curl -sS https://get.symfony.com/cli/installer | bash mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
