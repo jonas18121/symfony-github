@@ -11,6 +11,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      #  Action 2 : Install composer
+      - name: "Composer install"
+        run: composer install --no-interaction --no-progress
+
+      #  Action 3 : Install Symfony CLI
+      - name: Symfony CLI
+        run: |
+          curl -sS https://get.symfony.com/cli/installer | bash
+          mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
+
       - name: Deploy Over SSH
         uses: appleboy/ssh-action@master # action qui est dans la marquette place comme actions/checkout@v2
         with:
@@ -20,6 +30,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd var/www/symfony-github
+            git config pull.rebase false
             git pull 
             composer install
             symfony console d:m:m -n
