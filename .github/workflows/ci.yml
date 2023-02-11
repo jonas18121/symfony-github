@@ -13,7 +13,7 @@ jobs:
       - name: Setup PHP, extensions and composer with shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, json, ext-pdo_sqlite
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, json
 
       # cache
       - name: Cache
@@ -27,5 +27,12 @@ jobs:
       - name: "Composer install"
         run: composer install --no-interaction --no-progress
 
-      - name: LS
-        run: ls
+      # Install Symfony CLI
+      - name: Symfony CLI
+        run: |
+          curl -sS https://get.symfony.com/cli/installer | bash
+          mv /home/runner/.symfony/bin/symfony /usr/local/bin/symfony
+
+      # Check vulnerabilities
+      - name: Symfony Check Vulnerabilities
+        run: symfony check:security
