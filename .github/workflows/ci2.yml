@@ -15,6 +15,9 @@ jobs:
         with:
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, json, pdo_sqlite
 
+      - name: pdo_sqlite
+        run: sudo apt-get install php-sqlite3
+
       # cache
       - name: Cache
         uses: actions/cache@v2
