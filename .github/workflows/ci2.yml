@@ -30,9 +30,5 @@ jobs:
       - name: "Composer install"
         run: composer install --no-interaction --no-progress
 
-       # Install composer
-      - name: "Composer update"
-        run: composer update --no-interaction --no-progress
-
       - name: LS
         run: ls
