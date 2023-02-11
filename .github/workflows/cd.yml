@@ -5,7 +5,7 @@ on:
     branches: 
       - main
 jobs:
-  cd:
+  deploy:
     runs-on: ubuntu-latest
     continue-on-error: false
     steps:
@@ -18,4 +18,9 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          script: ls
+          script: |
+            cd /var/www/symfony-github
+            git pull 
+            composer install
+            symfony console d:m:m -n
+            APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
