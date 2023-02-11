@@ -1,3 +1,5 @@
+[![Pipeline-CI](https://github.com/jonas18121/symfony-github/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jonas18121/symfony-github/actions/workflows/ci.yml)
+
 Symfony Demo Application
 ========================
 
