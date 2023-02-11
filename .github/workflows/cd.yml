@@ -19,7 +19,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            cd /var/www/symfony-github
+            cd var/www/symfony-github
             git pull 
             composer install
             symfony console d:m:m -n
