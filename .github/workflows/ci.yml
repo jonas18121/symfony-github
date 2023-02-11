@@ -1,10 +1,23 @@
 name: Pipeline-CI
 on:
+  workflow_dispatch:
+  pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
+    branches:
+      - production
+      - main
+      - develop
+    paths-ignore:
+      - '**.md'
+      - 'examples/**'
   push:
-    branches: [ main ]
+    branches:
+      - '*' # permet d'executer les jobs avec les push de n'importe quel branches
 jobs:
   ci:
     runs-on: ${{ matrix.operating-system }} 
+
+    if: github.ref != 'refs/heads/main' # ne pas jouer ce job lors d'un push ou d'un pull request sur la branche main
+
     strategy:
       matrix:
         operating-system: [ubuntu-22.04, ubuntu-20.04, ubuntu-18.04, ubuntu-latest] # execute les actions ci-dessous dans les 4 OS préciser ici
