@@ -1,17 +1,17 @@
 name: Pipeline-CI
 on:
   workflow_dispatch:
-  pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
-    branches:
-      # - production
-      # - main
-      - develop
-    paths-ignore:
-      - '**.md'
-      - 'examples/**'
-  push:
-    branches:
-      - '*' # permet d'executer les jobs avec les push de n'importe quel branches
+    pull_request: # autoriser de jouer les jobs dans les pull request des branches listées ci-dessous
+      branches:
+        # - production
+        # - main
+        - develop
+      paths-ignore:
+        - '**.md'
+        - 'examples/**'
+    push:
+      branches:
+        - '*' # permet d'executer les jobs avec les push de n'importe quel branches
 jobs:
   ci:
     runs-on: ${{ matrix.operating-system }} 
