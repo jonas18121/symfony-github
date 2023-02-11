@@ -75,3 +75,7 @@ jobs:
       #  Action 12 : Linteur pour vérifier que les entité doctrine sont bien mappé et conforme aux recommendation Symfony
       - name: Lint Doctrine entities
         run: ./bin/console doctrine:schema:validate --skip-sync -vvv --no-interaction
+
+      #  Action 13 : Execution de PHPUnit
+      - name: PHP Unit
+        run: ./bin/phpunit
