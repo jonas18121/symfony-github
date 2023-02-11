@@ -21,7 +21,7 @@ jobs:
       #  Action 2 : Install composer
       - name: "Composer install"
         run: |
-          curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar --no-plugins --no-scripts /usr/local/bin/composer 
+          curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
           composer install --no-interaction --no-progress
 
       #  Action 3 : Install Symfony CLI
