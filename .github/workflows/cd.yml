@@ -35,6 +35,7 @@ jobs:
       - name: Deploy Over SSH
         uses: appleboy/ssh-action@master # action qui est dans la marquette place comme actions/checkout@v2
         with:
+          extension-csv: pdo, sqlite, mysql
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
