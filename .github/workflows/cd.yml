@@ -54,7 +54,8 @@ jobs:
             git config pull.rebase false
             git pull origin main
             php -v
-            composer install --ignore-platform-req=ext-pdo_sqlite
+            composer update --ignore-platform-req=ext-pdo_sqlite
+            php bin/console doctrine:database:create
             php bin/console doctrine:migrations:migrate -n
             APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear 
 
