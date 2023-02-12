@@ -27,11 +27,14 @@ jobs:
           php-version: ${{ env.PHP_VERSION }} # Précise la version PHP à utiliser
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, pdo_sqlite, dom, filter, gd, json
 
+      - name: Install Composer Dependencies
+        uses: ramsey/composer-install@v2
+
       #  Action 2 : Install composer
-      - name: "Composer install"
-        run: |
-          curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
-          composer install --no-interaction --no-progress
+      # - name: "Composer install"
+      #   run: |
+      #     curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
+      #     composer install --no-interaction --no-progress
 
       #  Action 3 : Install Symfony CLI
       - name: Symfony CLI
