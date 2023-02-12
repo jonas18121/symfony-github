@@ -14,7 +14,8 @@ on:
       - '*' # permet d'executer les jobs avec les push de n'importe quel branches
 jobs:
   ci2:
-    runs-on: self-hosted
+    # runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     # false : Arrêter la pipeline s'il y a une erreur
     continue-on-error: false # or true
@@ -39,8 +40,8 @@ jobs:
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, json, pdo_sqlite
 
       # pdo_sqlite
-      - name: pdo_sqlite
-        run: sudo apt-get install php-sqlite3 -y
+      # - name: pdo_sqlite
+      #   run: sudo apt-get install php-sqlite3 -y
 
       # cache
       - name: Cache
