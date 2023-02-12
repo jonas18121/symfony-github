@@ -15,8 +15,8 @@ jobs:
       - uses: actions/checkout@v2
 
       # pdo_sqlite
-      - name: pdo_sqlite
-        run: sudo apt-get install php-sqlite3 -y
+      # - name: pdo_sqlite
+      #   run: sudo apt-get install php-sqlite3 -y
 
       #  Action 2 : Install composer
       - name: "Composer install"

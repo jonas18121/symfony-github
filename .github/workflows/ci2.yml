@@ -40,8 +40,8 @@ jobs:
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, json, pdo_sqlite
 
       # pdo_sqlite
-      - name: pdo_sqlite
-        run: sudo apt-get install php-sqlite3 -y
+      # - name: pdo_sqlite
+      #   run: sudo apt-get install php-sqlite3 -y
 
       # cache
       - name: Cache
