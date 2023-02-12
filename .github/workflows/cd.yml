@@ -44,6 +44,7 @@ jobs:
             sudo apt-get install php-sqlite3 -y
             curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
             export COMPOSER_ALLOW_SUPERUSER=1; composer show;
+            composer require symfony/runtime
             composer install --no-interaction --no-progress --no-plugins --no-scripts
             curl -sS https://get.symfony.com/cli/installer | bash mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
             symfony console d:m:m -n
