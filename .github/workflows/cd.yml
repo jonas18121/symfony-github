@@ -50,7 +50,6 @@ jobs:
             cd var/www/symfony-github
             git config pull.rebase false
             git pull origin main
-            composer install --no-dev --optimize-autoloader
             symfony console d:m:m -n
             APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear 
 
