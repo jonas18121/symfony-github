@@ -54,6 +54,8 @@ jobs:
             git config pull.rebase false
             git pull origin main
             php -v
+            composer require symfony/runtime
+            composer install
             APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear 
 
 
