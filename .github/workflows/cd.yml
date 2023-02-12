@@ -20,6 +20,13 @@ jobs:
       - name: pdo_sqlite
         run: sudo apt-get install php-sqlite3 -y
 
+      #  Action 2 : https://github.com/shivammathur/setup-php (community)
+      - name: Setup PHP, extensions and composer with shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }} # Précise la version PHP à utiliser
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, pdo_sqlite, dom, filter, gd, json
+
       #  Action 2 : Install composer
       - name: "Composer install"
         run: |
@@ -35,14 +42,11 @@ jobs:
       - name: Deploy Over SSH
         uses: appleboy/ssh-action@master # action qui est dans la marquette place comme actions/checkout@v2
         with:
-          extension-csv: pdo, sqlite, mysql
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            sudo apt-get update
-            sudo apt-get install php-sqlite3
             cd var/www/symfony-github
             git config pull.rebase false
             git pull origin main
