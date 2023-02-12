@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - main
+env:
+  PHP_VERSION: 8.1
 
 jobs:
   deploy:
@@ -13,6 +15,11 @@ jobs:
     continue-on-error: false
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: actions/setup-php@v1
+        with:
+          php-version: ${{ env.PHP_VERSION }}
 
       # pdo_sqlite
       - name: pdo_sqlite
@@ -41,11 +48,6 @@ jobs:
             cd var/www/symfony-github
             git config pull.rebase false
             git pull 
-            curl -sSk https://getcomposer.org/installer | php -- --disable-tls && mv composer.phar /usr/local/bin/composer 
-            export COMPOSER_ALLOW_SUPERUSER=1; composer show;
-            composer require symfony/runtime
-            composer install --no-interaction --no-progress --no-plugins --no-scripts
-            curl -sS https://get.symfony.com/cli/installer | bash mv /home/runner/.symfony5/bin/symfony /usr/local/bin/symfony
             symfony console d:m:m -n
             APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear 
 
